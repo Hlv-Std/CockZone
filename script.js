@@ -173,7 +173,7 @@ const catalogo = [
     categoria:"Porno",
     anno:2025,
     valutazione:10,
-    poster:"https://wimg.rule34.xxx//images/3041/c0ec608e4786645581f61591a5d80a79.jpeg?3409108",
+    poster:"https://lh3.googleusercontent.com/proxy/8de_oEgw3m0fzg7sr3o_WTMjKokfvS7fBeFXo0Aih6ggC_JzZPWjIGVjB9ROV6GabwqCqAtLuDnqpG11MUXq7b4LR2p2-W2C8r56HUL5reqDJg",
   },
   {
     id:23,

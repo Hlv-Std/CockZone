@@ -287,6 +287,40 @@ const catalogo = [
     valutazione:9.9,
     poster:"https://m.media-amazon.com/images/M/MV5BOTNhOTk1ZTgtZTgwNy00NDdiLTlkNWItMDIxNjMwZDgxNTc4XkEyXkFqcGc@._V1_.jpg",
   },
+  {
+    id:37,
+    titolo:"Ward Dogs: i pawpatrol devono morire",
+    categoria:"Commedia",
+    anno:2017,
+    valutazione:8.1,
+    poster:"https://m.media-amazon.com/images/M/MV5BMzgwMDMyYzctODIzNC00YTM2LWFlN2UtYmMyNWVmZDU5NTg1XkEyXkFqcGc@._V1_.jpg",
+  },
+  {
+    id:38,
+    titolo:"Cipolla di vetro: non erà nè un arancia ne mecchanica",
+    categoria:"Thriller",
+    anno:2022,
+    valutazione:9.69,
+    poster:"https://m.media-amazon.com/images/M/MV5BMzI2ZDYxZTEtMzVlOC00OTUyLTgyNTAtYWFhNmRhZjAzZWE1XkEyXkFqcGc@._V1_.jpg",
+  },
+  {
+    id:39,
+    titolo:"Windstorm: il mio cavallo è nero e anche molto lungo",
+    categoria:"Porno",
+    anno:2003,
+    valutazione:2.67,
+    poster:"https://m.media-amazon.com/images/I/51LJ1nLM4BL._AC_UF894,1000_QL80_.jpg",
+  },
+  {
+    id:40,
+    titolo:"Godzilla Vs Hatsune miku",
+    categoria:"Anime",
+    anno:2014,
+    valutazione:8.9,
+    poster:"https://pad.mymovies.it/filmclub/2010/03/246/locandina.jpg",
+  },
+  
+  
   
   
 ];

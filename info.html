@@ -1,1 +1,43 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <link rel="icon" href="Favicon.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CinemaZone — Catalogo Streaming</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header__brand">
+      <span class="header__logo">CZ</span>
+      <h1 class="header__title">CinemaZone</h1>
+    </div>
+    <p class="header__tagline">Il tuo catalogo cinematografico in streaming</p>
+  </header>
+  <div id="overlay" class="overlay" aria-hidden="true">
+    <div class="scheda" role="dialog" aria-modal="true" aria-labelledby="scheda-titolo">
+      <button type="button" class="scheda__chiudi" id="chiudi-scheda" aria-label="Chiudi scheda">×</button>
+      <div class="scheda__contenuto">
+        <img id="scheda-poster" class="scheda__poster" src="" alt="">
+        <div class="scheda__info">
+          <h2 id="scheda-titolo" class="scheda__titolo"></h2>
+          <div class="scheda__meta">
+            <span id="scheda-anno" class="scheda__badge"></span>
+            <span id="scheda-categoria" class="scheda__badge scheda__badge--categoria"></span>
+            <span id="scheda-valutazione" class="scheda__valutazione"></span>
+          </div>
+          <p id="scheda-descrizione" class="scheda__descrizione"></p>
+          <button type="button" id="scheda-preferito" class="btn-preferito scheda__btn-preferito">Aggiungi ai preferiti</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <footer class="footer">
+    <p>Tutti i diritti pubblici e di riservatezza sono dati Da Gianluca Marzella, Fat8raccon -CockZone-</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

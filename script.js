@@ -289,11 +289,11 @@ const catalogo = [
   },
   {
     id:37,
-    titolo:"Ward Dogs: i pawpatrol devono morire",
+    titolo:"I guerrieri della notte: si scopa al buio",
     categoria:"Commedia",
     anno:2017,
     valutazione:8.1,
-    poster:"https://m.media-amazon.com/images/M/MV5BMzgwMDMyYzctODIzNC00YTM2LWFlN2UtYmMyNWVmZDU5NTg1XkEyXkFqcGc@._V1_.jpg",
+    poster:"https://m.media-amazon.com/images/I/71e0RF-pgvL._AC_UF894,1000_QL80_.jpg",
   },
   {
     id:38,
@@ -318,6 +318,38 @@ const catalogo = [
     anno:2014,
     valutazione:8.9,
     poster:"https://pad.mymovies.it/filmclub/2010/03/246/locandina.jpg",
+  },
+  {
+    id:41,
+    titolo:"La casa 2: La Casa 2(La Casa 1 non esiste)",
+    categoria:"Thriller",
+    anno:2009,
+    valutazione:11,
+    poster:"https://play-lh.googleusercontent.com/IsTIo4BwfijgSDC1sI5JKplcntnhHiKrErGgZSbqstoPlBubrAeMTbDYfviuo3rzULhu",
+  },
+  {
+    id:42,
+    titolo:"Jesse Pinkman diventa una ragazza degli anime insieme al suo camper della droga",
+    categoria:"Anime",
+    anno:2019,
+    valutazione:10,
+    poster:"https://pad.mymovies.it/filmclub/2019/08/065/locandina.jpg",
+  },
+  {
+    id:43,
+    titolo:"Shrek I: L'orgia gay con Chuchino",
+    categoria:"Commedia",
+    anno:2001,
+    valutazione:7.7,
+    poster:"https://thumbs.dfs.ivi.ru/storage0/contents/1/6/898e9af96a405da94fc011e2fa56af.jpg",
+  },
+  {
+    id:44,
+    titolo:"Il codice DaVinci:Parliamo di cazzi qui",
+    categoria:"Thriller",
+    anno:2011,
+    valutazione:8.2,
+    poster:"https://www.ibs.it/images/9788804523413_862235931_0_0_0_75.jpg",
   },
   
   

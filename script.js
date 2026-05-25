@@ -255,6 +255,38 @@ const catalogo = [
     valutazione:8.5,
     poster:"https://i.ebayimg.com/images/g/i7QAAOSw0R9gVerF/s-l1200.jpg",
   },
+  {
+    id:33,
+    titolo:"Fantozzi: il ritorno dello scopa nubi",
+    categoria:"Commedia",
+    anno:1993,
+    valutazione:9.1,
+    poster:"https://pad.mymovies.it/filmclub/2018/09/159/locandina.jpg",
+  },
+  {
+    id:34,
+    titolo:"Romanian Man: La tuta di rame",
+    categoria:"Supereroi",
+    anno:2003,
+    valutazione:8.5,
+    poster:"https://m.media-amazon.com/images/S/pv-target-images/cee8bddce9208f09b2791078d12997674e0917b2055f68f7998dec18763beb3e.jpg",
+  },
+  {
+    id:35,
+    titolo:"Super Mario 2:Il boss dei funghetti e il kink sulle donne giganti",
+    categoria:"Supereroi",
+    anno:2026,
+    valutazione:7.7,
+    poster:"https://m.media-amazon.com/images/M/MV5BODFmNmZhZDAtZDMyZC00NGEzLTlmZjktY2MxNjQ4NzViYjBlXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+  },
+  {
+    id:36,
+    titolo:"Iron Slung: Markiplier si beve il sangue del ciclo",
+    categoria:"Thriller",
+    anno:2025,
+    valutazione:9.9,
+    poster:"https://m.media-amazon.com/images/M/MV5BOTNhOTk1ZTgtZTgwNy00NDdiLTlkNWItMDIxNjMwZDgxNTc4XkEyXkFqcGc@._V1_.jpg",
+  },
   
   
 ];

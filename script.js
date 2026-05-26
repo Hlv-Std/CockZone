@@ -408,6 +408,10 @@ function creaCard(contenuto) {
   return card;
 }
 
+function change(){
+  window.location.href="info.html";
+}
+
 function renderCatalogo() {
   const risultati = filtraCatalogo(categoriaAttiva);
   grigliaCatalogo.innerHTML = "";

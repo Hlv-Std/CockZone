@@ -15,7 +15,43 @@
     </div>
     <p class="header__tagline">Il tuo catalogo cinematografico in streaming</p>
   </header>
-  <div id="overlay" class="overlay" aria-hidden="true">
+
+  <main class="layout">
+    <section class="catalogo" aria-label="Catalogo contenuti">
+      <div class="catalogo__toolbar">
+        <h2 class="section-title">Esplora il catalogo</h2>
+        <nav class="filtri" aria-label="Filtra per categoria">
+          <button type="button" class="filtro filtro--attivo" data-categoria="Tutti">Tutti</button>
+          <button type="button" class="filtro" data-categoria="Azione">Azione</button>
+          <button type="button" class="filtro" data-categoria="Fantascienza">Fantascienza</button>
+          <button type="button" class="filtro" data-categoria="Commedia">Commedia</button>
+          <button type="button" class="filtro" data-categoria="Thriller">Thriller</button>
+          <button type="button" class="filtro" data-categoria="Porno">+18</button>
+          <button type="button" class="filtro" data-categoria="Supereroi">Supereroi</button>
+          <button type="button" class="filtro" data-categoria="Anime">Anime</button>
+          
+          
+        </nav>
+      </div>
+      <div id="griglia-catalogo" class="griglia" role="list"></div>
+      <p id="messaggio-vuoto" class="messaggio-vuoto" hidden>Nessun contenuto in questa categoria.</p>
+    </section>
+
+    <aside class="preferiti" aria-label="Lista preferiti">
+      <div class="preferiti__intestazione">
+        <h2 class="section-title">La mia lista</h2>
+        
+        <span id="contatore-preferiti" class="badge" aria-live="polite">0</span>
+      </div>
+      <p class="preferiti__sottotitolo">
+        <span id="testo-contatore">0 titoli salvati</span>
+      </p>
+      <ul id="lista-preferiti" class="lista-preferiti"></ul>
+      <p id="lista-vuota" class="lista-vuota">La lista è vuota. Aggiungi titoli dal catalogo.</p>
+    </aside>
+  </main>
+
+   <div id="overlay" class="overlay" aria-hidden="true">
     <div class="scheda" role="dialog" aria-modal="true" aria-labelledby="scheda-titolo">
       <button type="button" class="scheda__chiudi" id="chiudi-scheda" aria-label="Chiudi scheda">×</button>
       <div class="scheda__contenuto">

@@ -492,7 +492,7 @@ body {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 40px;
+    bottom: 400px;
 }
 
 #boton:hover{

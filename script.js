@@ -593,16 +593,15 @@ schedaPreferito.addEventListener("click", () => {
 const schedaDialog = overlay.querySelector(".scheda");
 schedaDialog.addEventListener("click", (e) => e.stopPropagation());
 
-function filtraCatalogo2(categoria) {
-  if (categoria === "Tutti") return catalogo2;
-  return catalogo2.filter((item) => item.categoria === categoria);
+function filtraCatalogo2(categoria2) {
+  if (categoria2 === "Tutti") return catalogo2;
+  return catalogo2.filter((item) => item.categoria2 === categoria2);
 }
 
-const contenuto = catalogo2.find((item) => item.id === id);
-const contenuto = catalogo2.find((item) => item.id === id);
+const contenuto2 = catalogo2.find((item) => item.id === id);
+const contenuto2 = catalogo2.find((item) => item.id === id);
 
 renderCatalogo();
-renderCatalogo2();
 renderListaPreferiti();
 aggiornaContatore();
 

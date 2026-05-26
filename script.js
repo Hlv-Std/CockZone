@@ -357,6 +357,21 @@ const catalogo = [
   
 ];
 
+const catalogo2 = [
+
+{
+    id: 1,
+    titolo: "PlaceHolder",
+    categoria: "",
+    anno: 004,
+    valutazione: 0.0,
+    poster: "",
+  },
+
+
+  
+];
+
 let categoriaAttiva = "Tutti";
 let preferiti = [];
 

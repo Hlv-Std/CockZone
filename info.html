@@ -9,9 +9,18 @@
 </head>
 <body>
   <header class="header">
-    <div class="header__brand">
-      <span class="header__logo">CZ</span>
-      <h1 class="header__title">CinemaZone</h1>
+    <div class="header__row">
+      <div class="header__brand">
+        <span class="header__logo">CZ</span>
+        <h1 class="header__title">CinemaZone</h1>
+      </div>
+      <div class="header__session">
+        <button type="button" id="auth-user-label" class="header__user" aria-haspopup="dialog" aria-controls="profilo-overlay">
+          <img id="auth-user-avatar" class="header__avatar" src="" alt="Avatar utente">
+          <span id="auth-user-name" class="header__user-name"></span>
+        </button>
+        <button type="button" id="btn-logout" class="btn-logout">Esci</button>
+      </div>
     </div>
     <p class="header__tagline">Il tuo catalogo cinematografico in streaming</p>
   </header>
@@ -65,6 +74,24 @@
           </div>
           <p id="scheda-descrizione" class="scheda__descrizione"></p>
           <button type="button" id="scheda-preferito" class="btn-preferito scheda__btn-preferito">Aggiungi ai preferiti</button>
+          <section class="scheda__recensioni" aria-label="Recensioni film">
+            <h3 class="scheda__recensioni-titolo">Lascia una recensione</h3>
+            <form id="form-recensione" class="recensione-form">
+              <label for="input-recensione" class="recensione-label">La tua recensione</label>
+              <textarea
+                id="input-recensione"
+                class="recensione-input"
+                rows="3"
+                maxlength="280"
+                placeholder="Scrivi qui cosa ne pensi del film..."
+                required
+              ></textarea>
+              <p id="errore-recensione" class="recensione-errore" hidden></p>
+              <button type="submit" class="recensione-btn">Pubblica recensione</button>
+            </form>
+            <p id="recensioni-vuote" class="recensioni-vuote">Ancora nessuna recensione per questo film.</p>
+            <ul id="lista-recensioni" class="lista-recensioni"></ul>
+          </section>
         </div>
       </div>
     </div>
@@ -74,6 +101,44 @@
     <p>Tutti i diritti pubblici e di riservatezza sono dati Da Gianluca Marzella, Fat8raccon -CockZone-</p>
   </footer>
 
+  <div id="profilo-overlay" class="profilo-overlay" hidden>
+    <div class="profilo-box" role="dialog" aria-modal="true" aria-labelledby="profilo-titolo">
+      <button type="button" id="chiudi-profilo" class="profilo-chiudi" aria-label="Chiudi area utente">×</button>
+      <h2 id="profilo-titolo" class="profilo-titolo">Area Utente</h2>
+      <div id="profilo-preview-cover" class="profilo-preview-cover">
+        <img id="profilo-preview-avatar" class="profilo-preview-avatar" src="" alt="Foto profilo">
+      </div>
+      <p id="profilo-preview-bio" class="profilo-preview-bio">Nessuna descrizione impostata.</p>
+      <div class="profilo-quick-actions">
+        <button type="button" id="profilo-pick-avatar-btn" class="profilo-file-btn">Scegli avatar</button>
+        <button type="button" id="profilo-pick-cover-btn" class="profilo-file-btn">Scegli banner</button>
+      </div>
+      <form id="profilo-form" class="profilo-form">
+        <label class="profilo-label" for="profilo-avatar-input">Foto profilo</label>
+        <input class="profilo-input" id="profilo-avatar-input" type="url" placeholder="https://esempio.it/avatar.jpg">
+        <div class="profilo-file-row">
+          <button type="button" id="profilo-avatar-file-btn" class="profilo-file-btn">Carica immagine...</button>
+          <input id="profilo-avatar-file" class="profilo-file-input" type="file" accept="image/*">
+        </div>
+
+        <label class="profilo-label" for="profilo-cover-input">Sfondo profilo</label>
+        <input class="profilo-input" id="profilo-cover-input" type="url" placeholder="https://esempio.it/sfondo.jpg">
+        <div class="profilo-file-row">
+          <button type="button" id="profilo-cover-file-btn" class="profilo-file-btn">Carica immagine...</button>
+          <input id="profilo-cover-file" class="profilo-file-input" type="file" accept="image/*">
+        </div>
+
+        <label class="profilo-label" for="profilo-bio-input">Descrizione profilo</label>
+        <textarea class="profilo-textarea" id="profilo-bio-input" rows="3" maxlength="220" placeholder="Racconta qualcosa di te..."></textarea>
+
+        <p id="profilo-esito" class="profilo-esito" hidden></p>
+        <button type="submit" class="profilo-salva">Salva profilo</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
+

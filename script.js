@@ -375,6 +375,16 @@ const catalogo2 = [
 let categoriaAttiva = "Tutti";
 let preferiti = [];
 
+let catalogoAppInizializzata = false;
+
+function change() {
+  window.location.href = "info.html";
+}
+
+function initCatalogApp() {
+  if (catalogoAppInizializzata) return;
+  catalogoAppInizializzata = true;
+
 const grigliaCatalogo = document.getElementById("griglia-catalogo");
 const messaggioVuoto = document.getElementById("messaggio-vuoto");
 const listaPreferiti = document.getElementById("lista-preferiti");
@@ -421,10 +431,6 @@ function creaCard(contenuto) {
   card.addEventListener("click", () => apriScheda(contenuto.id));
 
   return card;
-}
-
-function change(){
-  window.location.href="info.html";
 }
 
 function renderCatalogo() {
@@ -536,8 +542,153 @@ const schedaValutazione = document.getElementById("scheda-valutazione");
 const schedaDescrizione = document.getElementById("scheda-descrizione");
 const schedaPreferito = document.getElementById("scheda-preferito");
 const chiudiScheda = document.getElementById("chiudi-scheda");
+const formRecensione = document.getElementById("form-recensione");
+const inputRecensione = document.getElementById("input-recensione");
+const erroreRecensione = document.getElementById("errore-recensione");
+const recensioniVuote = document.getElementById("recensioni-vuote");
+const listaRecensioni = document.getElementById("lista-recensioni");
+const btnUtente = document.getElementById("auth-user-label");
+const userAvatarHeader = document.getElementById("auth-user-avatar");
+const userNameHeader = document.getElementById("auth-user-name");
+const profiloOverlay = document.getElementById("profilo-overlay");
+const chiudiProfilo = document.getElementById("chiudi-profilo");
+const profiloForm = document.getElementById("profilo-form");
+const profiloAvatarInput = document.getElementById("profilo-avatar-input");
+const profiloCoverInput = document.getElementById("profilo-cover-input");
+const profiloAvatarFileInput = document.getElementById("profilo-avatar-file");
+const profiloAvatarFileBtn = document.getElementById("profilo-avatar-file-btn");
+const profiloCoverFileInput = document.getElementById("profilo-cover-file");
+const profiloCoverFileBtn = document.getElementById("profilo-cover-file-btn");
+const profiloPickAvatarBtn = document.getElementById("profilo-pick-avatar-btn");
+const profiloPickCoverBtn = document.getElementById("profilo-pick-cover-btn");
+const profiloBioInput = document.getElementById("profilo-bio-input");
+const profiloPreviewAvatar = document.getElementById("profilo-preview-avatar");
+const profiloPreviewCover = document.getElementById("profilo-preview-cover");
+const profiloPreviewBio = document.getElementById("profilo-preview-bio");
+const profiloEsito = document.getElementById("profilo-esito");
+
+const RECENSIONI_KEY = "cinemaZone_recensioni";
+const PROFILI_KEY = "cinemaZone_profili";
+
+function caricaRecensioni() {
+  try {
+    const raw = localStorage.getItem(RECENSIONI_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === "object" ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+function salvaRecensioniStorage() {
+  localStorage.setItem(RECENSIONI_KEY, JSON.stringify(recensioniPerFilm));
+}
+
+function utenteCorrente() {
+  if (window.CinemaZoneAuth && window.CinemaZoneAuth.getSession) {
+    return window.CinemaZoneAuth.getSession() || "Utente";
+  }
+  return "Utente";
+}
+
+function caricaProfili() {
+  try {
+    const raw = localStorage.getItem(PROFILI_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === "object" ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+function salvaProfiliStorage() {
+  localStorage.setItem(PROFILI_KEY, JSON.stringify(profiliPerUtente));
+}
+
+function profiloVuoto() {
+  return { avatar: "", cover: "", bio: "" };
+}
+
+function profiloAttuale() {
+  const utente = utenteCorrente();
+  const profilo = profiliPerUtente[utente];
+  if (!profilo || typeof profilo !== "object") return profiloVuoto();
+  return {
+    avatar: typeof profilo.avatar === "string" ? profilo.avatar : "",
+    cover: typeof profilo.cover === "string" ? profilo.cover : "",
+    bio: typeof profilo.bio === "string" ? profilo.bio : "",
+  };
+}
+
+function aggiornaNomeHeader() {
+  if (!btnUtente) return;
+  const nome = utenteCorrente();
+  const profilo = profiloAttuale();
+  if (userNameHeader) {
+    userNameHeader.textContent = nome;
+  } else {
+    btnUtente.textContent = nome;
+  }
+  if (userAvatarHeader) {
+    userAvatarHeader.src = profilo.avatar || "https://via.placeholder.com/24x24.png?text=U";
+  }
+}
+
+function renderProfiloPreview() {
+  const profilo = profiloAttuale();
+  if (profiloPreviewAvatar) {
+    profiloPreviewAvatar.src = profilo.avatar || "https://via.placeholder.com/72x72.png?text=User";
+  }
+  if (profiloPreviewCover) {
+    profiloPreviewCover.style.backgroundImage = profilo.cover ? `url("${profilo.cover}")` : "";
+  }
+  if (profiloPreviewBio) {
+    profiloPreviewBio.textContent = profilo.bio || "Nessuna descrizione impostata.";
+  }
+  if (profiloAvatarInput) profiloAvatarInput.value = profilo.avatar;
+  if (profiloCoverInput) profiloCoverInput.value = profilo.cover;
+  if (profiloBioInput) profiloBioInput.value = profilo.bio;
+}
+
+function leggiFileImmagine(file, onLoad) {
+  if (!file || !file.type.startsWith("image/")) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    if (typeof reader.result === "string") {
+      onLoad(reader.result);
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function apriSelettoreFile(inputFile) {
+  if (!inputFile) return;
+  if (typeof inputFile.showPicker === "function") {
+    inputFile.showPicker().catch(() => {
+      inputFile.click();
+    });
+    return;
+  }
+  inputFile.click();
+}
+
+function apriProfilo() {
+  if (!profiloOverlay) return;
+  renderProfiloPreview();
+  if (profiloEsito) profiloEsito.hidden = true;
+  profiloOverlay.hidden = false;
+}
+
+function chiudiProfiloBox() {
+  if (!profiloOverlay) return;
+  profiloOverlay.hidden = true;
+}
 
 let filmInScheda = null;
+let recensioniPerFilm = caricaRecensioni();
+let profiliPerUtente = caricaProfili();
 
 function aggiornaPulsanteScheda() {
   if (!filmInScheda) return;
@@ -545,6 +696,30 @@ function aggiornaPulsanteScheda() {
   schedaPreferito.disabled = inLista;
   schedaPreferito.textContent = inLista ? "Già in lista" : "Aggiungi ai preferiti";
   schedaPreferito.classList.toggle("btn-preferito--in-lista", inLista);
+}
+
+function mostraErroreRecensione(messaggio) {
+  if (!erroreRecensione) return;
+  erroreRecensione.textContent = messaggio || "";
+  erroreRecensione.hidden = !messaggio;
+}
+
+function renderRecensioniFilm() {
+  if (!filmInScheda || !listaRecensioni || !recensioniVuote) return;
+  const recensioni = recensioniPerFilm[filmInScheda.id] || [];
+  listaRecensioni.innerHTML = "";
+
+  recensioni.forEach((entry) => {
+    const li = document.createElement("li");
+    li.className = "recensione-item";
+    li.innerHTML = `
+      <p class="recensione-testo">${entry.testo}</p>
+      <p class="recensione-meta">di ${entry.utente} • ${entry.data}</p>
+    `;
+    listaRecensioni.appendChild(li);
+  });
+
+  recensioniVuote.hidden = recensioni.length > 0;
 }
 
 function apriScheda(id) {
@@ -560,6 +735,9 @@ function apriScheda(id) {
   schedaValutazione.textContent = `★ ${contenuto.valutazione}/10`;
   schedaDescrizione.textContent = getDescrizione(contenuto);
   aggiornaPulsanteScheda();
+  mostraErroreRecensione("");
+  if (inputRecensione) inputRecensione.value = "";
+  renderRecensioniFilm();
 
   overlay.classList.add("overlay--aperto");
   overlay.setAttribute("aria-hidden", "false");
@@ -580,6 +758,10 @@ overlay.addEventListener("click", (e) => {
 });
 
 document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && profiloOverlay && !profiloOverlay.hidden) {
+    chiudiProfiloBox();
+    return;
+  }
   if (e.key === "Escape" && overlay.classList.contains("overlay--aperto")) {
     chiudiSchedaFilm();
   }
@@ -590,11 +772,161 @@ schedaPreferito.addEventListener("click", () => {
   aggiornaPulsanteScheda();
 });
 
+if (formRecensione && inputRecensione) {
+  formRecensione.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (!filmInScheda) return;
+
+    const testo = inputRecensione.value.trim();
+    if (testo.length < 3) {
+      mostraErroreRecensione("La recensione deve avere almeno 3 caratteri.");
+      return;
+    }
+
+    const idFilm = filmInScheda.id;
+    const lista = recensioniPerFilm[idFilm] || [];
+    lista.unshift({
+      testo,
+      utente: utenteCorrente(),
+      data: new Date().toLocaleString("it-IT"),
+    });
+
+    recensioniPerFilm[idFilm] = lista.slice(0, 20);
+    salvaRecensioniStorage();
+    inputRecensione.value = "";
+    mostraErroreRecensione("");
+    renderRecensioniFilm();
+  });
+}
+
+if (btnUtente) {
+  btnUtente.addEventListener("click", apriProfilo);
+}
+
+if (chiudiProfilo) {
+  chiudiProfilo.addEventListener("click", chiudiProfiloBox);
+}
+
+if (profiloOverlay) {
+  profiloOverlay.addEventListener("click", (e) => {
+    if (e.target === profiloOverlay) chiudiProfiloBox();
+  });
+}
+
+// Click diretto su preview avatar/cover -> apre subito il file picker.
+if (profiloPreviewAvatar && profiloAvatarFileInput) {
+  profiloPreviewAvatar.style.cursor = "pointer";
+  profiloPreviewAvatar.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    apriSelettoreFile(profiloAvatarFileInput);
+  });
+}
+
+if (profiloPreviewCover && profiloCoverFileInput) {
+  profiloPreviewCover.style.cursor = "pointer";
+  profiloPreviewCover.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    apriSelettoreFile(profiloCoverFileInput);
+  });
+}
+
+if (profiloPickAvatarBtn && profiloAvatarFileInput) {
+  profiloPickAvatarBtn.addEventListener("click", () => {
+    apriSelettoreFile(profiloAvatarFileInput);
+  });
+}
+
+if (profiloPickCoverBtn && profiloCoverFileInput) {
+  profiloPickCoverBtn.addEventListener("click", () => {
+    apriSelettoreFile(profiloCoverFileInput);
+  });
+}
+
+if (profiloAvatarFileBtn && profiloAvatarFileInput) {
+  profiloAvatarFileBtn.addEventListener("click", () => {
+    apriSelettoreFile(profiloAvatarFileInput);
+  });
+
+  profiloAvatarFileInput.addEventListener("change", () => {
+    const file = profiloAvatarFileInput.files && profiloAvatarFileInput.files[0];
+    if (!file) return;
+    leggiFileImmagine(file, (dataUrl) => {
+      const utente = utenteCorrente();
+      if (!utente) return;
+      if (!profiliPerUtente[utente]) profiliPerUtente[utente] = profiloVuoto();
+      profiliPerUtente[utente].avatar = dataUrl;
+      salvaProfiliStorage();
+      if (profiloAvatarInput) profiloAvatarInput.value = dataUrl;
+      renderProfiloPreview();
+      aggiornaNomeHeader();
+    });
+  });
+}
+
+if (profiloCoverFileBtn && profiloCoverFileInput) {
+  profiloCoverFileBtn.addEventListener("click", () => {
+    apriSelettoreFile(profiloCoverFileInput);
+  });
+
+  profiloCoverFileInput.addEventListener("change", () => {
+    const file = profiloCoverFileInput.files && profiloCoverFileInput.files[0];
+    if (!file) return;
+    leggiFileImmagine(file, (dataUrl) => {
+      const utente = utenteCorrente();
+      if (!utente) return;
+      if (!profiliPerUtente[utente]) profiliPerUtente[utente] = profiloVuoto();
+      profiliPerUtente[utente].cover = dataUrl;
+      salvaProfiliStorage();
+      if (profiloCoverInput) profiloCoverInput.value = dataUrl;
+      renderProfiloPreview();
+    });
+  });
+}
+
+if (profiloForm) {
+  profiloForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const utente = utenteCorrente();
+    if (!utente) return;
+
+    const avatarVal = profiloAvatarInput ? profiloAvatarInput.value.trim() : "";
+    const coverVal = profiloCoverInput ? profiloCoverInput.value.trim() : "";
+    const bioVal = profiloBioInput ? profiloBioInput.value.trim() : "";
+
+    if (!profiliPerUtente[utente]) {
+      profiliPerUtente[utente] = profiloVuoto();
+    }
+
+    if (avatarVal) profiliPerUtente[utente].avatar = avatarVal;
+    if (coverVal) profiliPerUtente[utente].cover = coverVal;
+    profiliPerUtente[utente].bio = bioVal;
+
+    salvaProfiliStorage();
+    renderProfiloPreview();
+    aggiornaNomeHeader();
+    if (profiloEsito) {
+      profiloEsito.textContent = "Profilo aggiornato.";
+      profiloEsito.hidden = false;
+    }
+  });
+}
+
 const schedaDialog = overlay.querySelector(".scheda");
 schedaDialog.addEventListener("click", (e) => e.stopPropagation());
 
 
+aggiornaNomeHeader();
 renderCatalogo();
 renderListaPreferiti();
 aggiornaContatore();
+
+}
+
+if (window.CinemaZoneAuth && window.CinemaZoneAuth.getSession()) {
+  initCatalogApp();
+} else {
+  document.addEventListener("cinemazone-auth-ready", initCatalogApp, { once: true });
+}
 

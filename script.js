@@ -930,3 +930,4 @@ if (window.CinemaZoneAuth && window.CinemaZoneAuth.getSession()) {
   document.addEventListener("cinemazone-auth-ready", initCatalogApp, { once: true });
 }
 
+

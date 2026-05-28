@@ -351,6 +351,38 @@ const catalogo = [
     valutazione:8.2,
     poster:"https://www.ibs.it/images/9788804523413_862235931_0_0_0_75.jpg",
   },
+  {
+    id:45,
+    titolo:"Blackrooms: i neri diventerrano pirati",
+    categoria:"Thriller",
+    anno:2026,
+    valutazione:9.5,
+    poster:"https://www.classicult.it/wp-content/uploads/2026/03/IWP_BACKROOMS_poster_web_Chiwetel-scaled.webp?x80614",
+  },
+  {
+    id:46,
+    titolo:"TRANSformers: Megatron si sente Trump",
+    categoria:"Supereroi",
+    anno:2006,
+    valutazione:10,
+    poster:"https://m.media-amazon.com/images/M/MV5BZWI1ZDY1YTQtMjRkNy00ZDZhLWE3OTItMTIwNzliY2Y1MTZhXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+  },
+  {
+    id:47,
+    titolo:"Due Canne: un uomo e un armadillo si fanno un cannone",
+    categoria:"Commedia",
+    anno:2026,
+    valutazione:8.8,
+    poster:"https://images.ctfassets.net/4cd45et68cgf/1GVGeLXjIQEQyL9kVWPunS/076242f738b97dc6cd25dd762ec1ce2f/it_it_ds_main_main_ka_-_vertical_4_x_5__v__1080px1350p_rgb_predate_1.jpg?w=2000",
+  },
+  {
+    id:48,
+    titolo:"Bordeniuc: Il film",
+    categoria:"Azione",
+    anno:2008,
+    valutazione:5.5,
+    poster:"https://m.media-amazon.com/images/M/MV5BMzNiYzVjOWQtOGY0Mi00MTViLWI5OTktNjYwYTc3ZTUwODc4XkEyXkFqcGc@._V1_.jpg",
+  },
   
   
   
